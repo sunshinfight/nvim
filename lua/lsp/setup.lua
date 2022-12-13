@@ -1,12 +1,12 @@
 -- the servers that should be automatically installed
 local lsp_servers = {
-	"sumneko_lua",
-	"gopls",
-	"pyright",
-	"jsonls",
-	"html",
-	"bashls",
-	"tsserver",
+	-- "sumneko_lua",
+	-- "gopls",
+	-- "pyright",
+	-- "jsonls",
+	-- "html",
+	-- "bashls",
+	-- "tsserver",
 }
 -- using plug "nvim-lsp-installer" to ensure the installation
 -- should before the lsp config
@@ -31,8 +31,8 @@ local lsp_server_configs = {
 local lspconfig = require("lspconfig")
 
 local default_on_attach = function(client, bufnr)
-	client.resolved_capabilities.document_formatting = false
-	client.resolved_capabilities.document_range_formatting = false
+	client.server_capabilities.document_formatting = false
+	client.server_capabilities.document_range_formatting = false
 	local function buf_set_keymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
 	end
