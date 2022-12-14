@@ -4,7 +4,7 @@ return require("packer").startup(function()
 	-- 文件浏览器
 	use({
         "nvim-tree/nvim-tree.lua",
-		requires = "kyazdani42/nvim-web-devicons",
+		requires = "ryanoasis/vim-devicons",
 	})
 	-- 主题
 	use("ful1e5/onedark.nvim")
@@ -14,7 +14,7 @@ return require("packer").startup(function()
 	use("goolord/alpha-nvim")
 	-- 对齐线
 	use("lukas-reineke/indent-blankline.nvim")
-	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
+	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "ryanoasis/vim-devicons" })
 	-- 状态栏
 	use("nvim-lualine/lualine.nvim")
 	-- 编辑历史
