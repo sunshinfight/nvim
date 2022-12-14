@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 local opt = { noremap = true, silent = true }
 -- Visual模式 复制到系统剪贴板
 map("v", "<C-y>", '"+y', opt)
@@ -39,7 +39,16 @@ map("n", ",b", ":Buffers<CR>", opt)
 
 local pluginKeys = {}
 
-map("n", "<leader>e", ":NvimTreeToggle<CR>", opt)
+map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", opt)
+
+-- telescope 查找文件
+map('n', "<leader>o", "<cmd>Telescope find_files<cr>", opt)
+--  telescope 查找 workspace symbols
+map('n', '<leader>ws', '<cmd>Telescope coc workspace_symbols<cr>', opt)
+
+-- terminal
+map('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>')
+map('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 
 pluginKeys.nvimTreeList = {
 	-- 打开文件或文件夹
@@ -59,25 +68,6 @@ pluginKeys.nvimTreeList = {
 	{ key = "p", action = "paste" },
 	{ key = "o", action = "system_open" },
 }
-
-pluginKeys.mapLSP = function(mapbuf)
-	-- rename
-	mapbuf("n", ",r", "<cmd>lua vim.lsp.buf.rename()<CR>", opt)
-	-- code action
-	mapbuf("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opt)
-	-- go xx
-	mapbuf("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opt)
-	mapbuf("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opt)
-	mapbuf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opt)
-	mapbuf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opt)
-	mapbuf("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opt)
-	-- diagnostic
-	mapbuf("n", "go", "<cmd>lua vim.diagnostic.open_float()<CR>", opt)
-	mapbuf("n", "gk", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opt)
-	mapbuf("n", "gj", "<cmd>lua vim.diagnostic.goto_next()<CR>", opt)
-	-- format
-	mapbuf("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", { noremap = true })
-end
 
 pluginKeys.cmp = function(cmp)
 	local t = function(str)
@@ -150,5 +140,7 @@ pluginKeys.cmp = function(cmp)
 		}),
 	}
 end
+
+require('plugin-config/coc')
 
 return pluginKeys

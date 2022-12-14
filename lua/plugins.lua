@@ -6,26 +6,42 @@ return require("packer").startup(function()
         "nvim-tree/nvim-tree.lua",
 		requires = "ryanoasis/vim-devicons",
 	})
+    -- 模糊搜索
+    use {
+        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+        -- or                            , branch = '0.1.x',
+        requires = { {'nvim-lua/plenary.nvim'} }
+    }
+    -- 把 coc 的 symbols 搜索集成到 telescope
+	use {
+		'fannheyward/telescope-coc.nvim',
+		requires = { {'nvim-telescope/telescope.nvim'}} 
+	}
 	-- 主题
 	use("ful1e5/onedark.nvim")
 	use("rmehri01/onenord.nvim")
 	use("xiyaowong/nvim-transparent")
 	-- 首页
 	use("goolord/alpha-nvim")
-	-- 对齐线
-	use("lukas-reineke/indent-blankline.nvim")
 	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "ryanoasis/vim-devicons" })
 	-- 状态栏
 	use("nvim-lualine/lualine.nvim")
 	-- 编辑历史
 	use("simnalamburt/vim-mundo")
-	-- 语法高亮，折叠代码，缩进处理
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 	-- lsp支持
-	use({ "neovim/nvim-lspconfig", "williamboman/nvim-lsp-installer" })
+    use({'neoclide/coc.nvim', branch = 'release'})
+    -- 内置 terminal 
+    use "numToStr/FTerm.nvim"
+    -- 注释
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
 	-- 模糊匹配工具
-	use("junegunn/fzf")
-	use("junegunn/fzf.vim")
+	-- use("junegunn/fzf")
+	-- use("junegunn/fzf.vim")
 	-- 方便操作
 	use("tpope/vim-commentary")
 	use("tpope/vim-fugitive")
@@ -42,14 +58,6 @@ return require("packer").startup(function()
 	})
 	-- 函数列表
 	use("liuchengxu/vista.vim")
-	-- 代码补全
-	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-path")
-	use("hrsh7th/cmp-cmdline")
-	use("hrsh7th/nvim-cmp")
-	-- vsnip
-	use("hrsh7th/cmp-vsnip")
 	-- lsp美化
 	use("onsails/lspkind-nvim")
 	-- 代码片段
@@ -57,7 +65,6 @@ return require("packer").startup(function()
 		"SirVer/ultisnips",
 		requires = { { "honza/vim-snippets", rtp = "." } },
 	})
-	use("quangnguyen30192/cmp-nvim-ultisnips")
 	use({
 		"max397574/better-escape.nvim",
 		config = function()
@@ -67,7 +74,7 @@ return require("packer").startup(function()
 		end,
 	})
 	-- Github copilot
-	use({ "github/copilot.vim" })
+	-- use({ "github/copilot.vim" })
 	-- 格式化代码
 	use({ "jose-elias-alvarez/null-ls.nvim", requires = "nvim-lua/plenary.nvim" })
 	use({ "rlue/vim-barbaric" })

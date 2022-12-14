@@ -82,3 +82,6 @@ vim.g.python3_host_prog = "~/.config/nvim/nvim-python/bin/python3"
 vim.g.mouse = "a"
 vim.g.undofile = true
 vim.undodir = "~/.vim/undo"
+
+-- 退出时关闭内置终端
+vim.g.terminal_kill = 'term'
